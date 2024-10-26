@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 
 
 const connectToMongo = async (url) => {
-    await mongoose.connect(url);
+    await mongoose.connect(url,{
+        ssl: true
+    });
     console.log("Connected to MongoDB successfully");
 }
 

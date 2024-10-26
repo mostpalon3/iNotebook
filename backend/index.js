@@ -4,7 +4,6 @@ const express = require('express');
 let cors = require('cors')//helps use to make request from the browser as we cannot make request to different domain 
 //the boilerplate was copied from express docs
 const mongoURI = process.env.MONGO_URI;
-console.log(mongoURI)
 connectToMongo(mongoURI);
 // connectToMongo(process.env.REACT_APP_MONGO_URI);
 //below code will run while waiting to run mongo server 
