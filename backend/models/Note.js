@@ -1,6 +1,4 @@
 //capital me Notes isliye hai kyunki ye hamara model hao
-
-const { type } = require('@testing-library/user-event/dist/type');
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
