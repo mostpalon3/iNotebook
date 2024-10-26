@@ -1,0 +1,6 @@
+npm i express
+npm i mongoose
+
+
+npm i -D nodemon //to install nodemon as a devDependencies
+npx nodemon ./index.js //npx as we didnt have installed nodemon globally

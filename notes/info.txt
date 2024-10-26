@@ -1,0 +1,52 @@
+npm concurrently used to run multiple servers, here we need to run backend and client frontend
+
+
+//NoteState
+
+import NoteContext from "./noteContext";
+import { useState } from "react";
+
+const NoteState = (props) => {
+    const s1 = {
+        "name":"Harry",
+        "class":"5b"
+    }
+    const [state, setState] = useState(s1);
+    const update = () => {
+        setTimeout(() => {
+            setState({
+                "name":"Larry",
+                "class":"5b"
+            })
+        },1000)
+    }
+    return(
+            //ek bracket js use krne k liye ek curly object k liye
+        <NoteContext.Provider value = {{state,update}}>
+            {props.children}
+        </NoteContext.Provider>
+    )
+}
+
+export default NoteState;
+
+//about
+import React,{ useContext , useEffect} from 'react';
+import NoteContext from '../context/Notes/noteContext';
+
+const About = () => {
+  const a = useContext(NoteContext);
+  //we wanted to use it as componentDidMount 
+  useEffect(() => {
+    a.update();
+    // eslint-disable-next-line 
+  },[])//empty array in place of input since i want to run it once 
+  return (
+    <div>
+      This is About {a.state.name} and he is in class {a.state.class}
+    </div>
+  )
+}
+
+export default About;
+
