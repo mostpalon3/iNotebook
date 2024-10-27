@@ -22,3 +22,4 @@ iNotebook is a full-stack web application designed to provide users with an intu
 ### Development Tools
 - **Nodemon**: For automatically restarting the server during development.
 - **Concurrently**: To run both the frontend and backend concurrently during development.
+- **Mongoose**: To configure MongoDB.
