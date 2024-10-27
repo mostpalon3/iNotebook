@@ -1,0 +1,38 @@
+/* WebKit Browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 6px; /* Make scrollbar narrow */
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent; /* Transparent track */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #c0c0c0; /* Thumb color (slightly light gray) */
+    border-radius: 10px; /* Rounded edges for the thumb */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #a0a0a0; /* Darker thumb on hover */
+  }
+  
+  /* Firefox */
+  * {
+    scrollbar-width: thin; /* Reduces scrollbar width */
+    scrollbar-color: #c0c0c0 transparent; /* Thumb color and transparent track */
+  }
+.card-css{
+    height: 12rem;
+    width: 300px;
+    overflow: hidden;
+    border-radius: 20px;
+    padding: 0.5vw; /* Adds space inside the card to contain the scrollbar */
+  box-sizing: border-box; /* Makes padding part of the total width and height */
+    box-shadow: 15px 15px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s ease-in-out ;
+}
+.card-content {
+    height: 100%;
+    overflow-y: auto; /* Enables vertical scrolling */
+  }

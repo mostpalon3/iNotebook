@@ -3,7 +3,7 @@ import NoteContext from "../context/Notes/noteContext";
 import Noteitem from "./Noteitem";
 import AddNote from "./AddNote";
 import { useNavigate } from "react-router-dom";
-import {getItemAsync} from "../utility/localStorageUtils"
+import { getItemAsync } from "../utility/localStorageUtils";
 
 const Notes = (props) => {
   const context = useContext(NoteContext);
@@ -12,15 +12,15 @@ const Notes = (props) => {
 
   useEffect(() => {
     const checkLogin = async () => {
-      const token = await getItemAsync('token'); // Use the async function
+      const token = await getItemAsync("token"); // Use the async function
       if (token) {
         getNotes();
       } else {
         props.showAlert("Login/Sign Up to access the iNotebook", "warning");
-        Navigate('/login');
+        Navigate("/login");
       }
     };
-    
+
     checkLogin();
   }, [getNotes, Navigate, props]);
   const ref = useRef(null); //used for givinf reference
@@ -46,8 +46,8 @@ const Notes = (props) => {
     console.log("Updating the note...", note);
     e.preventDefault(); //taaki page reload na ho
     editNote(note.id, note.etitle, note.edescription, note.etag);
-    refClose.current.click(); 
-    props.showAlert("Updated successfully","success");
+    refClose.current.click();
+    props.showAlert("Updated successfully", "success");
     //it will trigger the close button when we click on the update button,as close button triggers the closing of the modal so thats why we needed to close the modal after updating as well , so we used reference clicking on the close button
   };
   const onChange = (e) => {
@@ -55,7 +55,7 @@ const Notes = (props) => {
   };
   return (
     <>
-      <AddNote showAlert={props.showAlert}/>
+      <AddNote showAlert={props.showAlert} />
       <button
         ref={ref}
         type="button"
@@ -107,8 +107,7 @@ const Notes = (props) => {
                   <label htmlFor="edescription" className="form-label">
                     Description
                   </label>
-                  <input
-                    type="text"
+                  <textarea
                     className="form-control"
                     name="edescription"
                     id="edescription"
@@ -116,7 +115,7 @@ const Notes = (props) => {
                     onChange={onChange}
                     minLength={5}
                     required
-                  />
+                  ></textarea>
                 </div>
                 <div className="mb-3">
                   <label htmlFor="etag" className="form-label">
@@ -164,7 +163,12 @@ const Notes = (props) => {
         </div>
         {notes.map((note) => {
           return (
-            <Noteitem key={note._id} updateNote={updateNote} note={note} showAlert={props.showAlert} />
+            <Noteitem
+              key={note._id}
+              updateNote={updateNote}
+              note={note}
+              showAlert={props.showAlert}
+            />
           );
         })}
       </div>
