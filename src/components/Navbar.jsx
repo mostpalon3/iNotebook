@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Button from "./Button";
+import UserProfile from "./UserProfile";
 import NoteContext from "../context/Notes/noteContext";
 
 const Navbar = () => {
@@ -19,7 +20,7 @@ const Navbar = () => {
 
   return (
     <nav className={`navbar navbar-expand-lg bg-${mode}`} data-bs-theme={mode}>
-      <div className="container-fluid">
+      <div className="container-fluid" style={{paddingRight:"1px"}}>
         <Link className="navbar-brand" to="/">
           iNotebook
         </Link>
@@ -75,6 +76,7 @@ const Navbar = () => {
             <button className="btn btn-primary mx-2" onClick={handleLogout}>Log Out</button>
           )}
         </div>
+        <UserProfile/>
       </div>
     </nav>
   );

@@ -9,7 +9,7 @@ const Noteitem = (props) => {
   const cardStyle = {
     ...myStyle,
     boxShadow: myStyle.backgroundColor === "white" 
-      ? "10px 10px 15px rgba(255, 255, 255, 0.27)"  // Light box shadow for dark background
+      ? "10px 10px 10px rgba(255, 255, 255, 0.20)"  // Light box shadow for dark background
       : "15px 15px 10px rgba(0, 0, 0, 0.2)"        // Dark box shadow for light background
   };
   return (

@@ -34,11 +34,13 @@
     border-radius: 20px;
     padding: 0.5vw;
     box-sizing: border-box;
+    margin: 10px;
     /* box-shadow: 15px 15px 10px rgba(0, 0, 0, 0.2); */
     transition: transform 0.5s ease-in-out;
 }
 .card-css:hover,
-.card-css:active{ 
+.card-css:active,
+.card-css:focus { 
   transform: scale(1.1);
 }
 
