@@ -3,7 +3,7 @@ import NoteContext from "../context/Notes/noteContext";
 
 const Noteitem = (props) => {
   const context = useContext(NoteContext)
-  const {deleteNote,myStyle} = context;
+  const {deleteNote} = context;
   const { note,updateNote } = props;//props passed in Notes
   return (
     <div className="col-md-3" >
