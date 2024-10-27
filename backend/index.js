@@ -8,9 +8,14 @@ connectToMongo(mongoURI);
 // connectToMongo(process.env.REACT_APP_MONGO_URI);
 //below code will run while waiting to run mongo server 
 const app = express()
-const port = 5001 || 6000;
+const port = process.env.PORT || 5001 ;
 
-app.use(cors())
+const corsOptions = {
+  methods: ["GET", "POST", "PUT", "DELETE"], // Add any other HTTP methods you need
+  credentials: true, // If you're using cookies or authentication tokens
+};
+
+app.use(cors(corsOptions));
 
 //if u want to use req.body then u have to use a middleware
 app.use(express.json())
