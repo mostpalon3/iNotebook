@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Signup = (props) => {
+  const host = process.env.REACT_APP_BACKEND_URL;
   const [credentials,setCredentials]=useState({name:"",email:"",password:"",cpassword:""})
 
   let navigate = useNavigate();
@@ -11,7 +12,7 @@ const Signup = (props) => {
       e.preventDefault();
       const {name,email,password} = credentials;//yha pehle hee nikal diya credentials se
       const response = await fetch ( 
-          `http://localhost:5001/api/auth/createuser`,
+          `${host}/api/auth/createuser`,
           {
             method: "POST",
             headers: {
