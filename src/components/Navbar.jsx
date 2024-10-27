@@ -72,7 +72,7 @@ const Navbar = () => {
               )}
             </form>
           ) : (
-            <button className="btn btn-primary" onClick={handleLogout}>Log Out</button>
+            <button className="btn btn-primary mx-2" onClick={handleLogout}>Log Out</button>
           )}
         </div>
       </div>

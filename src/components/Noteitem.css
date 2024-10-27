@@ -1,38 +1,66 @@
+/* Scrollbar Styling */
+
 /* WebKit Browsers (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
-    width: 6px; /* Make scrollbar narrow */
+    width: 6px; /* Narrow scrollbar width */
     height: 6px;
-  }
-  
-  ::-webkit-scrollbar-track {
+}
+
+::-webkit-scrollbar-track {
     background: transparent; /* Transparent track */
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background-color: #c0c0c0; /* Thumb color (slightly light gray) */
-    border-radius: 10px; /* Rounded edges for the thumb */
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #c0c0c0; /* Thumb color */
+    border-radius: 10px; /* Rounded edges */
+}
+
+::-webkit-scrollbar-thumb:hover {
     background-color: #a0a0a0; /* Darker thumb on hover */
-  }
-  
-  /* Firefox */
-  * {
+}
+
+/* Firefox */
+* {
     scrollbar-width: thin; /* Reduces scrollbar width */
     scrollbar-color: #c0c0c0 transparent; /* Thumb color and transparent track */
-  }
-.card-css{
+}
+
+/* Card Styling */
+.card-css {
     height: 12rem;
-    width: 300px;
+    width: 100%; /* Make the card responsive */
+    max-width: 300px; /* Constrain max width */
     overflow: hidden;
     border-radius: 20px;
-    padding: 0.5vw; /* Adds space inside the card to contain the scrollbar */
-  box-sizing: border-box; /* Makes padding part of the total width and height */
-    box-shadow: 15px 15px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.5s ease-in-out ;
+    padding: 0.5vw;
+    box-sizing: border-box;
+    /* box-shadow: 15px 15px 10px rgba(0, 0, 0, 0.2); */
+    transition: transform 0.5s ease-in-out;
 }
+.card-css:hover,
+.card-css:active{ 
+  transform: scale(1.1);
+}
+
 .card-content {
     height: 100%;
     overflow-y: auto; /* Enables vertical scrolling */
-  }
+    padding-right: 8px; /* Adds space to prevent content cutoff by scrollbar */
+}
+
+/* Responsive Styling */
+@media (min-width: 768px) and (max-width: 1400px) {
+    .col-md-3 {
+        flex: 1 1 48%; /* Wraps two items per row */
+        max-width: 48%;
+        margin-bottom: 1rem;
+    }
+
+    @media (min-width: 1024px) {
+        .col-md-3 {
+            flex: 1 1 33%; /* Wraps three items per row on larger screens */
+            max-width: 33%;
+            margin-bottom: 1rem;
+        }
+    }
+}
