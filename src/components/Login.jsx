@@ -1,13 +1,22 @@
-import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom'
-import Spinner from './Spinner'
+import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import Spinner from './Spinner';
 
 const Login = (props) => {
   const host = process.env.REACT_APP_BACKEND_URL;
   const [credentials, setCredentials] = useState({ email: "", password: "" });
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(true); // Start as true to show loading initially
   const [error, setError] = useState(null);
   let navigate = useNavigate();
+
+  useEffect(() => {
+    // Simulate loading delay for demonstration purposes
+    const loadTimeout = setTimeout(() => {
+      setLoaded(false); // Set loaded to false after a delay
+    }, 1000); // Adjust the time as necessary
+
+    return () => clearTimeout(loadTimeout); // Clear timeout on component unmount
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +63,9 @@ const Login = (props) => {
 
   return (
     <>
-      {loaded ?<Spinner/> :
+      {loaded ? (
+        <Spinner />
+      ) : (
         <div className="mt-2 bg-credentials">
           <h2 className="my-3">Login to continue to iNotebook</h2>
           {error && <div className="alert alert-danger">{error}</div>}
@@ -95,7 +106,8 @@ const Login = (props) => {
               Submit
             </button>
           </form>
-        </div>}
+        </div>
+      )}
     </>
   );
 };

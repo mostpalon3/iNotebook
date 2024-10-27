@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Spinner from "./Spinner";
 
@@ -10,9 +10,18 @@ const Signup = (props) => {
     password: "",
     cpassword: "",
   });
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(true);
   const [error, setError] = useState(null);
   let navigate = useNavigate();
+
+  useEffect(() => {
+    // Simulate loading delay for demonstration purposes
+    const loadTimeout = setTimeout(() => {
+      setLoaded(false); // Set loaded to false after a delay
+    }, 1000); // Adjust the time as necessary
+
+    return () => clearTimeout(loadTimeout); // Clear timeout on component unmount
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -1,0 +1,177 @@
+import NoteContext from "./noteContext";
+import { useState, useEffect } from "react";
+
+const NoteState = (props) => {
+  const host = process.env.REACT_APP_BACKEND_URL;
+  const notesInitial = [];
+  const [notes, setNotes] = useState(notesInitial);
+  const [loading, setLoading] = useState(false); // Add loading state
+  const [error, setError] = useState(null); // For error handling
+  const [mode, setMode] = useState('dark');
+  const [myStyle, setMyStyle] = useState({
+    color: 'white',
+    backgroundColor: 'black'
+  });
+
+  useEffect(() => {
+    // Initialize mode and style from local storage
+    const savedMode = localStorage.getItem('mode');
+    const savedStyle = localStorage.getItem('myStyle');
+    
+    if (savedMode) setMode(savedMode);
+    if (savedStyle) setMyStyle(JSON.parse(savedStyle));
+  }, []);
+
+  // Get all notes
+  const getNotes = async () => {
+    setLoading(true); // Set loading to true
+    setError(null); // Reset error state
+
+    try {
+      const response = await fetch(`${host}/api/notes/fetchallnote`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "auth-token": localStorage.getItem('token'),
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch notes: ' + response.statusText);
+      }
+
+      const json = await response.json();
+      setNotes(json);
+    } catch (err) {
+      setError(err.message); // Capture error message
+      console.error(err);
+    } finally {
+      setLoading(false); // Set loading to false regardless of success or failure
+    }
+  };
+
+  // Add a note
+  const addNote = async (title, description, tag) => {
+    setLoading(true); // Set loading to true
+    setError(null); // Reset error state
+
+    try {
+      const response = await fetch(`${host}/api/notes/addnote`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          "auth-token": localStorage.getItem('token'),
+        },
+        body: JSON.stringify({ title, description, tag }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add note: ' + response.statusText);
+      }
+
+      const note = await response.json();
+      setNotes((prevNotes) => prevNotes.concat(note)); // Use function form for state update
+    } catch (err) {
+      setError(err.message);
+      console.error(err);
+    } finally {
+      setLoading(false); // Set loading to false
+    }
+  };
+
+  // Delete a note
+  const deleteNote = async (id) => {
+    console.log(`Deleting a note with id ${id}`);
+    setLoading(true); // Set loading to true
+    setError(null); // Reset error state
+
+    try {
+      const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+          "auth-token": localStorage.getItem('token'),
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete note: ' + response.statusText);
+      }
+
+      const newNotes = notes.filter((note) => note._id !== id);
+      setNotes(newNotes);
+    } catch (err) {
+      setError(err.message);
+      console.error(err);
+    } finally {
+      setLoading(false); // Set loading to false
+    }
+  };
+
+  // Edit a note
+  const editNote = async (id, title, description, tag) => {
+    setLoading(true); // Set loading to true
+    setError(null); // Reset error state
+
+    try {
+      const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+          "auth-token": localStorage.getItem('token'),
+        },
+        body: JSON.stringify({ title, description, tag }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update note: ' + response.statusText);
+      }
+
+      const json = await response.json();
+      // Logic to edit in client
+      let newNotes = notes.map(note => 
+        note._id === id ? { ...note, title, description, tag } : note
+      );
+      setNotes(newNotes);
+    } catch (err) {
+      setError(err.message);
+      console.error(err);
+    } finally {
+      setLoading(false); // Set loading to false
+    }
+  };
+
+  const toggleDarkMode = () => {
+    if (mode === 'light') {
+      document.body.style.backgroundColor = 'white';
+      document.body.style.color = 'black';
+      setMode('dark');
+      setMyStyle({
+        color: 'white',
+        backgroundColor: 'black'
+      });
+    } else {
+      document.body.style.backgroundColor = 'black';
+      document.body.style.color = 'white';
+      setMode('light');
+      setMyStyle({
+        color: 'black',
+        backgroundColor: 'white'
+      });
+    }
+
+    // Save mode and style to local storage
+    localStorage.setItem('mode', mode);
+    localStorage.setItem('myStyle', JSON.stringify(myStyle));
+  };
+
+  return (
+    <NoteContext.Provider value={{
+      notes, addNote, deleteNote, editNote, getNotes, loading, error, mode, myStyle, setMyStyle, toggleDarkMode
+    }}>
+      {props.children}
+    </NoteContext.Provider>
+  );
+};
+
+export default NoteState;

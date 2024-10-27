@@ -4,26 +4,32 @@ import Noteitem from "./Noteitem";
 import AddNote from "./AddNote";
 import { useNavigate } from "react-router-dom";
 import { getItemAsync } from "../utility/localStorageUtils";
+import LoadingCard from "./LoadingCard";
 
 const Notes = (props) => {
   const context = useContext(NoteContext);
-  const { notes, getNotes, editNote } = context;
-  let Navigate = useNavigate();
+  const { notes, getNotes, editNote,myStyle } = context;
+  let navigate = useNavigate();
+
+  // Loading state to manage fetching status
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkLogin = async () => {
-      const token = await getItemAsync("token"); // Use the async function
+      const token = await getItemAsync("token");
       if (token) {
-        getNotes();
+        await getNotes(); // Await the notes fetching
+        setLoading(false); // Set loading to false after notes are fetched
       } else {
         props.showAlert("Login/Sign Up to access the iNotebook", "warning");
-        Navigate("/login");
+        navigate("/login");
       }
     };
 
     checkLogin();
-  }, [getNotes, Navigate, props]);
-  const ref = useRef(null); //used for givinf reference
+  }, [getNotes, navigate, props]);
+
+  const ref = useRef(null);
   const refClose = useRef(null);
   const [note, setNote] = useState({
     id: "",
@@ -31,9 +37,9 @@ const Notes = (props) => {
     edescription: "",
     etag: "",
   });
+
   const updateNote = (currentNote) => {
-    //this will be triggered on clicking the edit logo(pen logo)
-    ref.current.click(); //current means to which it is referring click on that
+    ref.current.click();
     setNote({
       id: currentNote._id,
       etitle: currentNote.title,
@@ -43,16 +49,16 @@ const Notes = (props) => {
   };
 
   const handleClick = (e) => {
-    console.log("Updating the note...", note);
-    e.preventDefault(); //taaki page reload na ho
+    e.preventDefault();
     editNote(note.id, note.etitle, note.edescription, note.etag);
     refClose.current.click();
     props.showAlert("Updated successfully", "success");
-    //it will trigger the close button when we click on the update button,as close button triggers the closing of the modal so thats why we needed to close the modal after updating as well , so we used reference clicking on the close button
   };
+
   const onChange = (e) => {
-    setNote({ ...note, [e.target.name]: e.target.value }); // Updates the respective field with its current value based on the input name.
+    setNote({ ...note, [e.target.name]: e.target.value });
   };
+
   return (
     <>
       <AddNote showAlert={props.showAlert} />
@@ -97,7 +103,6 @@ const Notes = (props) => {
                     id="etitle"
                     name="etitle"
                     value={note.etitle}
-                    aria-describedby="emailHelp"
                     onChange={onChange}
                     minLength={5}
                     required
@@ -142,9 +147,7 @@ const Notes = (props) => {
                 Close
               </button>
               <button
-                disabled={
-                  note.etitle.length < 5 || note.edescription.length < 5
-                }
+                disabled={note.etitle.length < 5 || note.edescription.length < 5}
                 type="submit"
                 className="btn btn-primary"
                 onClick={handleClick}
@@ -158,19 +161,20 @@ const Notes = (props) => {
 
       <div className="row my-3">
         <h2>Your Notes</h2>
-        <div className="container">
-          {notes.length === 0 && "No notes to display"}
-        </div>
-        {notes.map((note) => {
-          return (
+        {loading ? (
+          <LoadingCard myStyle={myStyle}/> // Show loading card while fetching notes
+        ) : notes.length === 0 ? (
+          <div className="container">No notes to display</div>
+        ) : (
+          notes.map((note) => (
             <Noteitem
               key={note._id}
               updateNote={updateNote}
               note={note}
               showAlert={props.showAlert}
             />
-          );
-        })}
+          ))
+        )}
       </div>
     </>
   );
