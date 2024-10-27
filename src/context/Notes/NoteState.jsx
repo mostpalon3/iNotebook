@@ -139,7 +139,7 @@ const toggleDarkMode = () => {
   return (
     //ek bracket js use krne k liye ek curly object k liye
     <NoteContext.Provider value={{
-       notes, addNote, deleteNote, editNote,getNotes,mode,myStyle,toggleDarkMode 
+       notes, addNote, deleteNote, editNote,getNotes,mode,myStyle,setMyStyle,toggleDarkMode 
        }}>
       {props.children}
     </NoteContext.Provider>

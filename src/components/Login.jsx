@@ -32,6 +32,7 @@ const Login = (props) => {
     const onChange = (e) => {
         setCredentials({ ...credentials , [e.target.name]: e.target.value }); // Updates the respective field with its current value based on the input name.
       };
+
   return (
     <div className="mt-2 bg-credentials">
       <h2 className="my-3">Login to continue to iNotebook</h2>
@@ -49,7 +50,7 @@ const Login = (props) => {
             name="email"
             aria-describedby="emailHelp"
           />
-          <div id="emailHelp" className="form-text">
+          <div id="emailHelp" className="form-text" style={{color:'gray'}}>
             We'll never share your email with anyone else.
           </div>
         </div>
