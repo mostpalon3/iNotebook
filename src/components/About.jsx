@@ -1,11 +1,14 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import './About.css'
+import NoteContext from '../context/Notes/noteContext';
 
 const About = () => {
+  const context = useContext(NoteContext);
+  const {myStyle} = context;
   return (
-    <div className='container'>
-     <div className="container about-box">
-        <h1 className='text-center'>iNotebook Mern Project</h1>
+    <div className='container' >
+<div className="container about-box" style={myStyle.color === 'white' ? { borderColor: 'black' } : { borderColor: 'white' }}>
+        <h1 className='text-center' >iNotebook Mern Project</h1>
         <div className="about-card">
           <ul>
             <li>This is a Mern project which is mainly  <strong>REACTJS FOCUSED</strong> with a basic server having rest api which support login and uses the CRUD operation.</li>

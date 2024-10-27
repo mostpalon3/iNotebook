@@ -111,8 +111,8 @@ const NoteState = (props) => {
 
   const [mode,setMode] = useState('dark');
   const [myStyle, setMyStyle] = useState({
-    color: 'black',
-    backgroundColor: 'white'
+    color: 'white',
+    backgroundColor: 'black'
 });
 const toggleDarkMode = () => {
   if (mode === 'light') {
