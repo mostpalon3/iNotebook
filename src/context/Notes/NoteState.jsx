@@ -2,7 +2,7 @@ import NoteContext from "./noteContext";
 import { useState } from "react";
 
 const NoteState = (props) => {
-  const host = "http://localhost:5001";
+  const host = process.env.REACT_APP_BACKEND_URL || "http://localhost:5001";
   const notesInitial = [];
   const [notes, setNotes] = useState(notesInitial);
 
@@ -20,6 +20,11 @@ const NoteState = (props) => {
         }
       }
     );
+    if (!response.ok) {
+      // Handle error (maybe log it or show a notification)
+      console.error('Failed to fetch notes:', response.statusText);
+      return; // Exit if the fetch fails
+    }
     const json = await response.json();
     setNotes(json);
   };
