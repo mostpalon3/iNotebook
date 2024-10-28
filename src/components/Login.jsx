@@ -72,7 +72,7 @@ const Login = (props) => {
         <div className="mt-2 ">
           <Bg/>
           <div className="cred-card">
-          <h2 className="my-3 ">Login to continue to iNotebook</h2>
+          <h2 className="my-3 ">Login to iNotebook</h2>
           {error && <div className="alert alert-danger">{error}</div>}
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
