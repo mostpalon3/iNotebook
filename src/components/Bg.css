@@ -1,0 +1,21 @@
+.my-container {
+    position: relative; /* Ensure that the ::before element is positioned relative to this container */
+    z-index: 1; 
+    height: 35rem;
+    border: 1px solid rgb(239, 239, 239);
+    border-radius: 10px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for a glassy effect */
+}
+
+.my-container::before {
+    content: "";
+  background: url(../images/bg.svg) no-repeat center center/cover;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 0;
+  opacity: 0.8;
+  border-radius: 10px;
+}

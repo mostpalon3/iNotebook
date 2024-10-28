@@ -1,6 +1,8 @@
 import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Spinner from "./Spinner";
+import Bg from "./Bg";
+import './credentials.css'
 
 const Signup = (props) => {
   const host = process.env.REACT_APP_BACKEND_URL;
@@ -66,6 +68,8 @@ const Signup = (props) => {
     <>
      {loaded ?<Spinner/> : (
         <div className="mt-2">
+          <Bg/>
+          <div className="cred-card" style={{height:"28rem"}}>
           <h2 className="my-2">Create an account to use iNotebook</h2>
           {error && <div className="alert alert-danger">{error}</div>}
           <form onSubmit={handleSubmit}>
@@ -123,6 +127,7 @@ const Signup = (props) => {
               Submit
             </button>
           </form>
+        </div>
         </div>
       )}
     </>

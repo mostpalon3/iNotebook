@@ -8,10 +8,10 @@ export function capitalize(text){
 }
 function Alert(props) {
   return (
-    <div style={{height:'80px'}}>
+    <div style={{height:"80px"}}>
       {/* style should be wrapped in a object */}
     {props.alert && //if alert is not null
-    <>
+    <div>
       <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
         <symbol id="check-circle-fill" viewBox="0 0 16 16">
           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
@@ -29,7 +29,7 @@ function Alert(props) {
         <strong>{capitalize(props.alert.type==='danger'?'error':props.alert.type)}</strong> : {props.alert.msg}
         </div>
       </div>
-    </>}
+    </div>}
   </div>
   );
 }
