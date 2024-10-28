@@ -1,4 +1,4 @@
-.my-container {
+ .my-container {
     position: relative; /* Ensure that the ::before element is positioned relative to this container */
     z-index: 1; 
     height: 35rem;
