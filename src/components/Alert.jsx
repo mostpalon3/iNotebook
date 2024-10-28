@@ -8,7 +8,7 @@ export function capitalize(text){
 }
 function Alert(props) {
   return (
-    <div style={{height:"80px"}}>
+    <div style={{height:"7vh"}}>
       {/* style should be wrapped in a object */}
     {props.alert && //if alert is not null
     <div>
