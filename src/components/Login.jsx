@@ -87,6 +87,7 @@ const Login = (props) => {
                 id="email"
                 name="email"
                 aria-describedby="emailHelp"
+                placeholder="Enter a valid Email Id"
                 required
               />
               <div id="emailHelp" className="form-text" style={{ color: 'gray' }}>
@@ -104,6 +105,7 @@ const Login = (props) => {
                 className="form-control"
                 id="password"
                 name="password"
+                placeholder="Enter a valid password"
                 required
               />
             </div>

@@ -76,7 +76,7 @@ const Navbar = () => {
             <button className="btn btn-primary mx-2" onClick={handleLogout}>Log Out</button>
           )}
         </div>
-      <UserProfile/>
+        {location.pathname==='/'?<UserProfile/>:""}
       </div>
     </nav>
   );

@@ -3,7 +3,7 @@ import './Bg.css'
 
 const Bg = () => {
   return (
-    <div class="my-container">
+    <div className="my-container">
 </div>
   )
 }

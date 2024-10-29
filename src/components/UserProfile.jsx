@@ -5,24 +5,34 @@ import NoteContext from '../context/Notes/noteContext';
 
 const UserProfile = () => {
   const host = process.env.REACT_APP_BACKEND_URL;
-  const location = useLocation(); // Get the current location
+  const location = useLocation();
   const context = useContext(NoteContext);
   const { myStyle } = context;
-  const fetchLetter = (str)=> {
-    let acronym = str.split(/\s/).reduce((response,word)=> response+=word.slice(0,1),'')
+
+  const fetchLetter = (str) => {
+    let acronym = str.split(/\s/).reduce((response, word) => response += word.slice(0, 1), '');
     return acronym;
-  }
-  
+  };
+
   const containerStyle = {
     color: myStyle.color === 'white' ? 'black' : 'white',
     backgroundColor: myStyle.backgroundColor === 'black' ? 'white' : 'black',
   };
 
   const [userData, setUserData] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false); // Track authentication status
 
   useEffect(() => {
-    // Fetch user data only if on the home ("/") route
-    if (location.pathname === '/') {
+    // Check if user is authenticated
+    const token = localStorage.getItem('token');
+    if (token) {
+      setLoggedIn(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Fetch user data only if authenticated and on the "/" route
+    if (loggedIn && location.pathname === '/') {
       const fetchUserData = async () => {
         try {
           const response = await fetch(`${host}/api/auth/getuser`, {
@@ -38,13 +48,12 @@ const UserProfile = () => {
           console.error('Error fetching user data:', error);
         }
       };
-      
+
       fetchUserData();
     }
-  }, [host, location.pathname]);
+  }, [host, location.pathname, loggedIn]);
 
-  // Return null if not on the home route or if userData is not yet loaded
-  if (location.pathname !== '/' || !userData) {
+  if (!loggedIn || location.pathname !== '/' || !userData) {
     return null;
   }
 
@@ -52,7 +61,7 @@ const UserProfile = () => {
     <div className='container user-container'>
       <div className='user-profile' style={containerStyle}>
         <div className="name-tag" style={{ color: myStyle.color === 'black' ? 'white' : 'black' }}>
-        {(fetchLetter(userData.name)).toUpperCase()}
+          {fetchLetter(userData.name).toUpperCase()}
         </div>
       </div>
       <div className="name" style={{ color: myStyle.color }}>
