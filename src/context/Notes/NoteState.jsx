@@ -1,5 +1,5 @@
 import NoteContext from "./noteContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const NoteState = (props) => {
   const host = process.env.REACT_APP_BACKEND_URL;
@@ -114,6 +114,20 @@ const NoteState = (props) => {
     color: 'white',
     backgroundColor: 'black'
 });
+
+useEffect(()=>{
+  const storedMode = localStorage.getItem('toggledMode');
+
+  if(storedMode){
+      if(storedMode === 'light'){
+        setMode('light')
+        toggleDarkMode()
+      }else{
+        setMode('dark');
+        toggleDarkMode()
+      }
+  }
+},[])
 const toggleDarkMode = () => {
   if (mode === 'light') {
       document.body.style.backgroundColor = 'white';
@@ -124,6 +138,7 @@ const toggleDarkMode = () => {
           color: 'white',
           backgroundColor: 'black'
       });
+      localStorage.setItem('toggleMode', 'light')
 
   } else {
       document.body.style.backgroundColor = 'black';
@@ -134,6 +149,8 @@ const toggleDarkMode = () => {
           color: 'black',
           backgroundColor: 'white'
       });
+      //tried storing the string direcly here to avoid errors
+      localStorage.setItem('toggledMode', 'dark')
   }
 }
   return (
