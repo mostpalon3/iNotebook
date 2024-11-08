@@ -20,7 +20,7 @@ const NotePage = (props) => {
       })
     : "";
       const newStyle = myStyle.backgroundColor === "white"
-      ? { color: "white", backgroundColor: "black" }
+      ? { color: "white", backgroundColor: "black" ,border:"0.1px solid silver"}
       : { color: "black", backgroundColor: "white" }
   return (
     <div
