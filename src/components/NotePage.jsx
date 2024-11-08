@@ -1,23 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
+import NoteContext from "../context/Notes/noteContext";
 
 const NotePage = (props) => {
+  const { myStyle } = useContext(NoteContext);
   const { refNote, noteInfo } = props;
-  const formattedDate = refNote
+
+  const formattedDate = noteInfo?.date
     ? new Date(noteInfo.date).toLocaleDateString("en-GB", {
         day: "numeric",
         month: "short",
         year: "numeric",
       })
     : "";
-  const formattedTime = noteInfo
+
+  const formattedTime = noteInfo?.date
     ? new Date(noteInfo.date).toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       })
     : "";
-
+      const newStyle = myStyle.backgroundColor === "white"
+      ? { color: "white", backgroundColor: "black" }
+      : { color: "black", backgroundColor: "white" }
   return (
-    <div>
+    <div
+    >
       <button
         type="button"
         ref={refNote}
@@ -33,15 +40,17 @@ const NotePage = (props) => {
         id="staticBackdrop"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div className="modal-content">
-            <div className="modal-header" style={{padding:"13px"}}>
+          <div className="modal-content"style={
+            newStyle
+          }>
+            <div className="modal-header" style={{ padding: "13px" }}>
               <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                {noteInfo.title}
+                {noteInfo?.title}
                 <div className="form-text" style={{ color: "gray" }}>
                   <small style={{ fontSize: "0.8em" }}>
                     {formattedTime} {formattedDate}
@@ -55,7 +64,7 @@ const NotePage = (props) => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">{noteInfo.description}</div>
+            <div className="modal-body">{noteInfo?.description}</div>
             <div className="modal-footer">
               <button
                 type="button"
