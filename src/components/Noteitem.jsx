@@ -15,6 +15,12 @@ const Noteitem = (props) => {
       ? "10px 10px 10px rgba(255, 255, 255, 0.20)"  // Light box shadow for dark background
       : "15px 15px 10px rgba(0, 0, 0, 0.2)"          // Dark box shadow for light background
   };
+  // Extract date and time separately if note.date exists
+  const formattedDate = note 
+  ? new Date(note.date).toLocaleDateString("en-GB", { day: 'numeric', month: 'short', year: 'numeric' }) 
+  : "";
+  const formattedTime = note ? new Date(note.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "";
+
 
   // Conditional rendering for LoadingCard or Note component
   return (
@@ -38,6 +44,9 @@ const Noteitem = (props) => {
                 onClick={() => updateNote(note)}
               ></i>
             </div>
+            <divs className="form-text" style={{ color: 'gray' }}>
+              <small>{formattedTime} {formattedDate}</small>
+            </divs>
             <p className="card-text">{note.description}</p>
           </div>
         </div>
