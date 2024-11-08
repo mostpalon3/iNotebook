@@ -1,5 +1,5 @@
 import NoteContext from "./noteContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const NoteState = (props) => {
   const host = process.env.REACT_APP_BACKEND_URL;
