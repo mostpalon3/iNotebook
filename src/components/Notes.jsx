@@ -5,6 +5,7 @@ import AddNote from "./AddNote";
 import { useNavigate } from "react-router-dom";
 import { getItemAsync } from "../utility/localStorageUtils";
 import LoadingCard from "./LoadingCard";
+import NotePage from "./NotePage";
 
 const Notes = (props) => {
   const context = useContext(NoteContext);
@@ -31,10 +32,18 @@ const Notes = (props) => {
 
   const ref = useRef(null);
   const refClose = useRef(null);
+  const refNote = useRef(null);
   const [note, setNote] = useState({
     id: "",
     etitle: "",
     edescription: "",
+    etag: "",
+  });
+  const [noteInfo, setNoteInfo] = useState({
+    id: "",
+    title: "",
+    date:"",
+    description: "",
     etag: "",
   });
 
@@ -58,10 +67,22 @@ const Notes = (props) => {
   const onChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
   };
+  const showNotes = (note)=>{
+    refNote.current.click();
+    setNoteInfo({
+      id: note._id,
+      title: note.title,
+      date:note.date,
+      description: note.description,
+      tag: note.tag,
+    });
+    console.log(note)
+  }
 
   return (
     <>
       <AddNote showAlert={props.showAlert} />
+      <NotePage refNote={refNote} noteInfo={noteInfo}/>
       <button
         ref={ref}
         type="button"
@@ -172,6 +193,7 @@ const Notes = (props) => {
               updateNote={updateNote}
               note={note}
               showAlert={props.showAlert}
+              showNotes={showNotes}
             />
           ))
         )}

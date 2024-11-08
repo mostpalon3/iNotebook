@@ -6,7 +6,7 @@ import LoadingCard from "./LoadingCard";
 const Noteitem = (props) => {
   const context = useContext(NoteContext);
   const { deleteNote, myStyle } = context;
-  const { note, updateNote } = props;
+  const { note, updateNote,showNotes } = props;
 
   // Define card style with conditional box shadow
   const cardStyle = {
@@ -43,10 +43,13 @@ const Noteitem = (props) => {
                 className="fa-solid fa-pen-to-square mx-2"
                 onClick={() => updateNote(note)}
               ></i>
+              <i className="fa-solid fa-arrow-up-right-from-square" 
+              onClick={()=>showNotes(note)}
+              ></i>
             </div>
-            <divs className="form-text" style={{ color: 'gray' }}>
+            <div className="form-text" style={{ color: 'gray' }}>
               <small>{formattedTime} {formattedDate}</small>
-            </divs>
+            </div>
             <p className="card-text">{note.description}</p>
           </div>
         </div>
