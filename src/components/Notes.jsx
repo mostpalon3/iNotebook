@@ -181,6 +181,7 @@ const Notes = (props) => {
       </div>
 
       <div className="row my-3">
+        <hr />
         <h2>Your Notes</h2>
         {loading ? (
           <LoadingCard myStyle={myStyle}/> // Show loading card while fetching notes

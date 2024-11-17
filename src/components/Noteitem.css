@@ -34,7 +34,7 @@
     border-radius: 20px;
     padding: 0.5vw;
     box-sizing: border-box;
-    margin: 10px;
+    margin: 10px 10px 12px 10px;
     /* box-shadow: 15px 15px 10px rgba(0, 0, 0, 0.2); */
     transition: transform 0.5s ease-in-out;
 }
@@ -49,20 +49,23 @@
     overflow-y: auto; /* Enables vertical scrolling */
     padding-right: 8px; /* Adds space to prevent content cutoff by scrollbar */
 }
+.col-md-3 {
+    margin-bottom: 1.2rem;
+}
 
 /* Responsive Styling */
 @media (min-width: 768px) and (max-width: 1400px) {
     .col-md-3 {
         flex: 1 1 48%; /* Wraps two items per row */
         max-width: 48%;
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
     }
 
     @media (min-width: 1024px) {
         .col-md-3 {
             flex: 1 1 33%; /* Wraps three items per row on larger screens */
             max-width: 33%;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
     }
 }
