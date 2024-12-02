@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Spinner from './Spinner';
 import Bg from "./Bg";
-import './credentials.css'
+import './credentials.css';
 
 
 const Login = (props) => {
@@ -72,7 +72,7 @@ const Login = (props) => {
         <div className="mt-2 ">
           <Bg/>
           <div className="cred-card">
-          <h2 className="my-3 ">Login to iNotebook</h2>
+          <h2 className="my-2 ">Login to iNotebook</h2>
           {error && <div className="alert alert-danger">{error}</div>}
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -113,6 +113,9 @@ const Login = (props) => {
               Submit
             </button>
           </form>
+          <small className="form-text">New User?<Link className="primary mx-2" to="/signup">
+                  Sign Up
+                </Link></small>
           </div>
         </div>
       )}
