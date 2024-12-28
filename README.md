@@ -1,4 +1,4 @@
-# <a href = "https://inotebook-project-site.netlify.app"> iNotebook mern Web Application (REACT JS PROJECT)</a>
+# <a href = "https://inotebook-project-site.netlify.app"> iNotebook mern Web Application</a>
 
 ## Description
 iNotebook is a full-stack web application designed to provide users with an intuitive platform for managing their notes and tasks. With a user-friendly interface, iNotebook allows users to create, edit, and delete notes seamlessly while ensuring data persistence through MongoDB. The application is built with a modern tech stack that emphasizes performance, security, and responsiveness, making it accessible on both desktop and mobile devices.
